@@ -10,13 +10,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
+
     * {
       box-sizing: border-box;
     }
 
     body {
       margin: 0;
-      font-family: Inter, sans-serif;
+      font-family: Inter, Arial, sans-serif;
       background: #f7f9fc;
       color: #24324a;
     }
@@ -37,15 +38,16 @@
       text-align: center;
       color: #68758a;
       font-size: 17px;
-      margin-bottom: 40px;
+      margin: 0 auto 38px;
+      line-height: 1.5;
     }
 
     h2 {
       font-size: 21px;
-      margin-bottom: 18px;
+      margin: 0 0 18px;
     }
 
-    /* KORTIT */
+    /* CARD AREA */
 
     .cards {
       display: grid;
@@ -55,10 +57,9 @@
     }
 
     .card {
-      background: #dff1ff;
-      border-radius: 20px;
-      min-height: 190px;
-      padding: 22px 14px;
+      aspect-ratio: 2 / 3;
+      border-radius: 22px;
+      padding: 18px;
 
       display: flex;
       flex-direction: column;
@@ -73,18 +74,30 @@
       user-select: none;
 
       transition:
-        transform .15s ease,
-        box-shadow .15s ease,
-        opacity .15s ease;
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        opacity 0.15s ease;
     }
 
     .card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(40, 90, 130, .12);
+      box-shadow: 0 8px 20px rgba(40, 90, 130, 0.12);
+    }
+
+    .card:active {
+      cursor: grabbing;
     }
 
     .card.dragging {
-      opacity: .45;
+      opacity: 0.4;
+    }
+
+    .blue {
+      background: #dff1ff;
+    }
+
+    .purple {
+      background: #eadfff;
     }
 
     .icon {
@@ -92,7 +105,7 @@
       margin-bottom: 18px;
     }
 
-    /* SIJAT */
+    /* RANKING */
 
     .ranking {
       display: flex;
@@ -102,14 +115,16 @@
 
     .slot {
       min-height: 90px;
+
       border: 2px dashed #cbd5e1;
       border-radius: 18px;
-      background: #ffffff;
+
+      background: white;
 
       display: flex;
       align-items: center;
 
-      transition: .15s ease;
+      transition: 0.15s ease;
     }
 
     .slot.over {
@@ -119,19 +134,29 @@
 
     .number {
       width: 60px;
+      flex-shrink: 0;
+
       text-align: center;
+
       font-size: 22px;
       font-weight: 700;
+
       color: #64748b;
     }
 
     .slot .card {
+      aspect-ratio: auto;
+
       min-height: 76px;
-      width: 240px;
+      width: 280px;
+
       margin: 6px;
+
       flex-direction: row;
       justify-content: flex-start;
+
       gap: 15px;
+
       padding: 10px 18px;
     }
 
@@ -145,10 +170,11 @@
       font-size: 15px;
     }
 
-    /* NAPPI */
+    /* BUTTON */
 
     .continue {
       margin-top: 35px;
+
       display: flex;
       justify-content: center;
     }
@@ -156,6 +182,7 @@
     button {
       border: none;
       border-radius: 16px;
+
       padding: 17px 45px;
 
       background: #2563eb;
@@ -167,256 +194,966 @@
       cursor: pointer;
     }
 
+    button:hover {
+      background: #1d4ed8;
+    }
+
     button:disabled {
       background: #cbd5e1;
       cursor: not-allowed;
     }
 
+    /* FINAL CHECK */
+
+    .final {
+      max-width: 500px;
+      margin: 100px auto;
+      text-align: center;
+    }
+
+    .final h1 {
+      margin-bottom: 20px;
+    }
+
+    .math {
+      font-size: 34px;
+      font-weight: 700;
+      margin: 35px 0;
+    }
+
+    .answer {
+      width: 180px;
+
+      padding: 16px;
+
+      border: 2px solid #cbd5e1;
+      border-radius: 14px;
+
+      font-size: 24px;
+      text-align: center;
+
+      outline: none;
+    }
+
+    .answer:focus {
+      border-color: #2563eb;
+    }
+
+    .error {
+      color: #dc2626;
+      font-size: 14px;
+      margin-top: 15px;
+      min-height: 20px;
+    }
+
+    .success-icon {
+      font-size: 70px;
+      margin-bottom: 20px;
+    }
+
+    /* MOBILE */
+
     @media (max-width: 800px) {
+
       .cards {
         grid-template-columns: repeat(2, 1fr);
       }
+
     }
 
     @media (max-width: 500px) {
+
+      .container {
+        padding-top: 25px;
+      }
+
+      h1 {
+        font-size: 26px;
+      }
+
+      .subtitle {
+        font-size: 15px;
+      }
+
       .cards {
-        grid-template-columns: repeat(2, 1fr);
         gap: 10px;
       }
 
       .card {
-        min-height: 160px;
+        min-height: 150px;
+        font-size: 14px;
+      }
+
+      .icon {
+        font-size: 40px;
       }
 
       .slot .card {
         width: auto;
         flex: 1;
       }
+
+      .number {
+        width: 45px;
+      }
+
     }
+
   </style>
 </head>
 
+
 <body>
 
-<div class="container">
+<div class="container" id="app">
 
-  <h1>Toimintakortit</h1>
+  <!-- ============================= -->
+  <!-- VAIHE 1: TOIMINTAKORTIT -->
+  <!-- ============================= -->
 
-  <p class="subtitle">
-    On tärkeää, että uudessa kirjastossa voi...
-  </p>
+  <section id="activityStep">
+
+    <h1>Toimintakortit</h1>
+
+    <p class="subtitle">
+      On tärkeää, että uudessa kirjastossa voi...
+    </p>
 
 
-  <h2>Valitse 4–5 tärkeintä</h2>
+    <h2>Valitse 4–5 tärkeintä</h2>
 
-  <div class="cards" id="cards">
 
-    <div class="card" draggable="true" data-name="Pelaaminen">
-      <div class="icon">🎮</div>
-      Pelaaminen
+    <div class="cards" id="activityCards">
+
+      <div class="card blue" draggable="true"
+           data-name="Pelaaminen">
+
+        <div class="icon">🎮</div>
+        Pelaaminen
+
+      </div>
+
+
+      <div class="card blue" draggable="true"
+           data-name="Etäkokouksen pitäminen">
+
+        <div class="icon">💻</div>
+        Etäkokouksen pitäminen
+
+      </div>
+
+
+      <div class="card blue" draggable="true"
+           data-name="Hiljainen lukeminen">
+
+        <div class="icon">📖</div>
+        Hiljainen lukeminen
+
+      </div>
+
+
+      <div class="card blue" draggable="true"
+           data-name="Satutunnit">
+
+        <div class="icon">🧸</div>
+        Satutunnit
+
+      </div>
+
+
+      <div class="card blue" draggable="true"
+           data-name="Tulostaminen">
+
+        <div class="icon">🖨️</div>
+        Tulostaminen
+
+      </div>
+
+
+      <div class="card blue" draggable="true"
+           data-name="Viranomaisasiointi">
+
+        <div class="icon">🏛️</div>
+        Viranomaisasiointi
+
+      </div>
+
+
+      <div class="card blue" draggable="true"
+           data-name="Kahvittelu ja jutustelu">
+
+        <div class="icon">☕</div>
+        Kahvittelu ja jutustelu
+
+      </div>
+
+
+      <div class="card blue" draggable="true"
+           data-name="Kirjojen selailu ja katselu">
+
+        <div class="icon">📚</div>
+        Kirjojen selailu ja katselu
+
+      </div>
+
+
+      <div class="card blue" draggable="true"
+           data-name="Opiskelu ryhmässä">
+
+        <div class="icon">👥</div>
+        Opiskelu ryhmässä
+
+      </div>
+
+
+      <div class="card blue" draggable="true"
+           data-name="Näyttelyiden katselu">
+
+        <div class="icon">🖼️</div>
+        Näyttelyiden katselu
+
+      </div>
+
+
+      <div class="card blue" draggable="true"
+           data-name="Tietokoneen käyttö">
+
+        <div class="icon">🖥️</div>
+        Tietokoneen käyttö
+
+      </div>
+
+
+      <div class="card blue" draggable="true"
+           data-name="Leikkiminen">
+
+        <div class="icon">🧩</div>
+        Leikkiminen
+
+      </div>
+
     </div>
 
-    <div class="card" draggable="true" data-name="Etäkokouksen pitäminen">
-      <div class="icon">💻</div>
-      Etäkokouksen pitäminen
+
+    <h2>Tärkeysjärjestys</h2>
+
+
+    <div class="ranking">
+
+      <div class="slot">
+        <div class="number">1.</div>
+        <div class="placeholder">
+          Raahaa tärkein kortti tähän
+        </div>
+      </div>
+
+      <div class="slot">
+        <div class="number">2.</div>
+        <div class="placeholder">
+          Raahaa kortti tähän
+        </div>
+      </div>
+
+      <div class="slot">
+        <div class="number">3.</div>
+        <div class="placeholder">
+          Raahaa kortti tähän
+        </div>
+      </div>
+
+      <div class="slot">
+        <div class="number">4.</div>
+        <div class="placeholder">
+          Raahaa kortti tähän
+        </div>
+      </div>
+
+      <div class="slot">
+        <div class="number">5.</div>
+        <div class="placeholder">
+          Raahaa kortti tähän
+        </div>
+      </div>
+
     </div>
 
-    <div class="card" draggable="true" data-name="Hiljainen lukeminen">
-      <div class="icon">📖</div>
-      Hiljainen lukeminen
+
+    <div class="continue">
+
+      <button id="activityButton" disabled>
+        Jatka →
+      </button>
+
     </div>
 
-    <div class="card" draggable="true" data-name="Satutunnit">
-      <div class="icon">🧸</div>
-      Satutunnit
-    </div>
-
-    <div class="card" draggable="true" data-name="Tulostaminen">
-      <div class="icon">🖨️</div>
-      Tulostaminen
-    </div>
-
-    <div class="card" draggable="true" data-name="Viranomaisasiointi">
-      <div class="icon">🏛️</div>
-      Viranomaisasiointi
-    </div>
-
-    <div class="card" draggable="true" data-name="Kahvittelu ja jutustelu">
-      <div class="icon">☕</div>
-      Kahvittelu ja jutustelu
-    </div>
-
-    <div class="card" draggable="true" data-name="Kirjojen selailu ja katselu">
-      <div class="icon">📚</div>
-      Kirjojen selailu ja katselu
-    </div>
-
-    <div class="card" draggable="true" data-name="Opiskelu ryhmässä">
-      <div class="icon">👥</div>
-      Opiskelu ryhmässä
-    </div>
-
-    <div class="card" draggable="true" data-name="Näyttelyiden katselu">
-      <div class="icon">🖼️</div>
-      Näyttelyiden katselu
-    </div>
-
-    <div class="card" draggable="true" data-name="Tietokoneen käyttö">
-      <div class="icon">🖥️</div>
-      Tietokoneen käyttö
-    </div>
-
-    <div class="card" draggable="true" data-name="Leikkiminen">
-      <div class="icon">🧩</div>
-      Leikkiminen
-    </div>
-
-  </div>
-
-
-  <h2>Tärkeysjärjestys</h2>
-
-  <div class="ranking">
-
-    <div class="slot" data-position="1">
-      <div class="number">1.</div>
-      <div class="placeholder">Raahaa tärkein kortti tähän</div>
-    </div>
-
-    <div class="slot" data-position="2">
-      <div class="number">2.</div>
-      <div class="placeholder">Raahaa kortti tähän</div>
-    </div>
-
-    <div class="slot" data-position="3">
-      <div class="number">3.</div>
-      <div class="placeholder">Raahaa kortti tähän</div>
-    </div>
-
-    <div class="slot" data-position="4">
-      <div class="number">4.</div>
-      <div class="placeholder">Raahaa kortti tähän</div>
-    </div>
-
-    <div class="slot" data-position="5">
-      <div class="number">5.</div>
-      <div class="placeholder">Raahaa kortti tähän</div>
-    </div>
-
-  </div>
-
-
-  <div class="continue">
-    <button id="continueButton" disabled>
-      Jatka →
-    </button>
-  </div>
+  </section>
 
 </div>
 
 
 <script>
 
+  /* =====================================
+     YLEINEN KORTTILOGIIKKA
+     ===================================== */
+
   let draggedCard = null;
 
-  const cards = document.querySelectorAll(".card");
-  const slots = document.querySelectorAll(".slot");
-  const continueButton = document.getElementById("continueButton");
+
+  function setupCards(cardContainerId, buttonId, onComplete) {
+
+    const container =
+      document.getElementById(cardContainerId);
+
+    const cards =
+      container.querySelectorAll(".card");
+
+    const slots =
+      document.querySelectorAll(".slot");
+
+    const button =
+      document.getElementById(buttonId);
 
 
-  /* RAHAUS */
+    /*
+       DESKTOP: DRAG & DROP
+    */
 
-  cards.forEach(card => {
+    cards.forEach(card => {
 
-    card.addEventListener("dragstart", () => {
-      draggedCard = card;
-      card.classList.add("dragging");
+      card.addEventListener("dragstart", () => {
+
+        draggedCard = card;
+
+        card.classList.add("dragging");
+
+      });
+
+
+      card.addEventListener("dragend", () => {
+
+        card.classList.remove("dragging");
+
+        draggedCard = null;
+
+      });
+
+
+      /*
+         MOBILE / KLIKKAUS
+
+         Jos korttia klikataan,
+         se menee ensimmäiseen vapaaseen paikkaan.
+      */
+
+      card.addEventListener("click", () => {
+
+        const emptySlot =
+          [...slots].find(
+            slot => !slot.querySelector(".card")
+          );
+
+        if (!emptySlot) return;
+
+        placeCard(card, emptySlot);
+
+        checkSlots();
+
+      });
+
     });
 
-    card.addEventListener("dragend", () => {
-      card.classList.remove("dragging");
-      draggedCard = null;
-    });
 
-  });
-
-
-  slots.forEach(slot => {
-
-    slot.addEventListener("dragover", event => {
-      event.preventDefault();
-      slot.classList.add("over");
-    });
-
-    slot.addEventListener("dragleave", () => {
-      slot.classList.remove("over");
-    });
-
-    slot.addEventListener("drop", event => {
-
-      event.preventDefault();
-
-      slot.classList.remove("over");
-
-      if (!draggedCard) return;
-
-      const existingCard = slot.querySelector(".card");
-
-      if (existingCard) {
-        document.getElementById("cards").appendChild(existingCard);
-      }
-
-      const placeholder = slot.querySelector(".placeholder");
-
-      if (placeholder) {
-        placeholder.remove();
-      }
-
-      slot.appendChild(draggedCard);
-
-      checkComplete();
-    });
-
-  });
-
-
-  /* TARKISTA ONKO 4–5 VALITTU */
-
-  function checkComplete() {
-
-    let count = 0;
+    /*
+       SLOTIT
+    */
 
     slots.forEach(slot => {
-      if (slot.querySelector(".card")) {
-        count++;
-      }
+
+      slot.addEventListener("dragover", event => {
+
+        event.preventDefault();
+
+        slot.classList.add("over");
+
+      });
+
+
+      slot.addEventListener("dragleave", () => {
+
+        slot.classList.remove("over");
+
+      });
+
+
+      slot.addEventListener("drop", event => {
+
+        event.preventDefault();
+
+        slot.classList.remove("over");
+
+        if (!draggedCard) return;
+
+        placeCard(draggedCard, slot);
+
+        checkSlots();
+
+      });
+
     });
 
-    continueButton.disabled = count < 4;
+
+    /*
+       ASETETAAN KORTTI
+    */
+
+    function placeCard(card, slot) {
+
+      const oldCard =
+        slot.querySelector(".card");
+
+      /*
+         Jos paikassa oli jo kortti,
+         palautetaan vanha kortti korttialueelle.
+      */
+
+      if (oldCard) {
+
+        container.appendChild(oldCard);
+
+      }
+
+
+      const placeholder =
+        slot.querySelector(".placeholder");
+
+      if (placeholder) {
+
+        placeholder.remove();
+
+      }
+
+
+      slot.appendChild(card);
+
+    }
+
+
+    /*
+       TARKISTETAAN VALINTOJEN MÄÄRÄ
+    */
+
+    function checkSlots() {
+
+      let count = 0;
+
+
+      slots.forEach(slot => {
+
+        if (slot.querySelector(".card")) {
+
+          count++;
+
+        }
+
+      });
+
+
+      button.disabled = count < 4;
+
+    }
+
+
+    /*
+       JATKA
+    */
+
+    button.addEventListener("click", () => {
+
+      const ranking = [];
+
+
+      slots.forEach(slot => {
+
+        const card =
+          slot.querySelector(".card");
+
+
+        if (card) {
+
+          ranking.push({
+            name: card.dataset.name,
+            position: slot.querySelector(".number").textContent
+          });
+
+        }
+
+      });
+
+
+      onComplete(ranking);
+
+    });
+
   }
 
 
-  /* JATKA */
 
-  continueButton.addEventListener("click", () => {
+  /* =====================================
+     VAIHE 1 VALMIS
+     ===================================== */
 
-    const ranking = [];
+  setupCards(
+    "activityCards",
+    "activityButton",
+    function(ranking) {
 
-    slots.forEach(slot => {
+      localStorage.setItem(
+        "toimintakortit",
+        JSON.stringify(ranking)
+      );
 
-      const card = slot.querySelector(".card");
 
-      if (card) {
-        ranking.push(card.dataset.name);
+      showFeatureStep();
+
+    }
+  );
+
+
+
+  /* =====================================
+     VAIHE 2
+     OMINAISUUSKORTIT
+     ===================================== */
+
+  function showFeatureStep() {
+
+    document.getElementById("app").innerHTML = `
+
+      <section id="featureStep">
+
+        <h1>Ominaisuuskortit</h1>
+
+        <p class="subtitle">
+          Haluan, että tilassa on...
+        </p>
+
+
+        <h2>Valitse 4–5 tärkeintä</h2>
+
+
+        <div class="cards" id="featureCards">
+
+
+          <div class="card purple" draggable="true"
+               data-name="Säkkituolit ja nojatuolit">
+
+            <div class="icon">🛋️</div>
+            Säkkituolit ja nojatuolit
+
+          </div>
+
+
+          <div class="card purple" draggable="true"
+               data-name="Suljettavat hiljaiset etätyö- ja opiskelutilat">
+
+            <div class="icon">🚪</div>
+            Suljettavat hiljaiset etätyö- ja opiskelutilat
+
+          </div>
+
+
+          <div class="card purple" draggable="true"
+               data-name="Isot yhteistyöpöydät">
+
+            <div class="icon">👥</div>
+            Isot yhteistyöpöydät
+
+          </div>
+
+
+          <div class="card purple" draggable="true"
+               data-name="Nuorten oma nurkka">
+
+            <div class="icon">🧑</div>
+            Nuorten oma nurkka
+
+          </div>
+
+
+          <div class="card purple" draggable="true"
+               data-name="Pelikonsolit ja pelilaitteet">
+
+            <div class="icon">🎮</div>
+            Pelikonsolit ja pelilaitteet
+
+          </div>
+
+
+          <div class="card purple" draggable="true"
+               data-name="Kahviautomaatti">
+
+            <div class="icon">☕</div>
+            Kahviautomaatti
+
+          </div>
+
+
+          <div class="card purple" draggable="true"
+               data-name="Lainaus- ja palautusautomaatit">
+
+            <div class="icon">🤖</div>
+            Lainaus- ja palautusautomaatit
+
+          </div>
+
+
+          <div class="card purple" draggable="true"
+               data-name="Asiakastietokoneet">
+
+            <div class="icon">💻</div>
+            Asiakastietokoneet
+
+          </div>
+
+
+          <div class="card purple" draggable="true"
+               data-name="Kirjahyllyjä">
+
+            <div class="icon">📚</div>
+            Kirjahyllyjä
+
+          </div>
+
+
+          <div class="card purple" draggable="true"
+               data-name="Uutuuskirjoja">
+
+            <div class="icon">✨</div>
+            Uutuuskirjoja
+
+          </div>
+
+
+          <div class="card purple" draggable="true"
+               data-name="Leluja ja piirustusvälineitä">
+
+            <div class="icon">🧸</div>
+            Leluja ja piirustusvälineitä
+
+          </div>
+
+
+          <div class="card purple" draggable="true"
+               data-name="Mukavia tuoleja ja nojatuoleja">
+
+            <div class="icon">🪑</div>
+            Mukavia tuoleja ja nojatuoleja
+
+          </div>
+
+
+          <div class="card purple" draggable="true"
+               data-name="Kirkas valaistus">
+
+            <div class="icon">💡</div>
+            Kirkas valaistus
+
+          </div>
+
+
+          <div class="card purple" draggable="true"
+               data-name="Lämmin valaistus">
+
+            <div class="icon">🕯️</div>
+            Lämmin valaistus
+
+          </div>
+
+
+          <div class="card purple" draggable="true"
+               data-name="Selkeät opasteet">
+
+            <div class="icon">🧭</div>
+            Selkeät opasteet
+
+          </div>
+
+
+          <div class="card purple" draggable="true"
+               data-name="Sanoma- ja aikakauslehdet">
+
+            <div class="icon">📰</div>
+            Sanoma- ja aikakauslehdet
+
+          </div>
+
+
+          <div class="card purple" draggable="true"
+               data-name="Digilehdet">
+
+            <div class="icon">📱</div>
+            Digilehdet
+
+          </div>
+
+
+          <div class="card purple" draggable="true"
+               data-name="Asiakaspalvelutiski">
+
+            <div class="icon">👩‍💼</div>
+            Asiakaspalvelutiski
+
+          </div>
+
+
+          <div class="card purple" draggable="true"
+               data-name="Eväiden syöntimahdollisuus">
+
+            <div class="icon">🥪</div>
+            Eväiden syöntimahdollisuus
+
+          </div>
+
+
+        </div>
+
+
+        <h2>Tärkeysjärjestys</h2>
+
+
+        <div class="ranking">
+
+          <div class="slot">
+            <div class="number">1.</div>
+            <div class="placeholder">
+              Raahaa tärkein kortti tähän
+            </div>
+          </div>
+
+
+          <div class="slot">
+            <div class="number">2.</div>
+            <div class="placeholder">
+              Raahaa kortti tähän
+            </div>
+          </div>
+
+
+          <div class="slot">
+            <div class="number">3.</div>
+            <div class="placeholder">
+              Raahaa kortti tähän
+            </div>
+          </div>
+
+
+          <div class="slot">
+            <div class="number">4.</div>
+            <div class="placeholder">
+              Raahaa kortti tähän
+            </div>
+          </div>
+
+
+          <div class="slot">
+            <div class="number">5.</div>
+            <div class="placeholder">
+              Raahaa kortti tähän
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="continue">
+
+          <button id="featureButton" disabled>
+            Jatka →
+          </button>
+
+        </div>
+
+      </section>
+    `;
+
+
+    setupCards(
+      "featureCards",
+      "featureButton",
+      function(ranking) {
+
+        localStorage.setItem(
+          "ominaisuuskortit",
+          JSON.stringify(ranking)
+        );
+
+
+        showFinalStep();
+
+      }
+    );
+
+  }
+
+
+
+  /* =====================================
+     VAIHE 3
+     BOTTISUOJA
+     ===================================== */
+
+  function showFinalStep() {
+
+    document.getElementById("app").innerHTML = `
+
+      <div class="final">
+
+        <h1>Vielä yksi pieni tehtävä</h1>
+
+        <p class="subtitle">
+          Varmistetaan, että vastauksesi on tullut ihmiseltä.
+        </p>
+
+
+        <div class="math">
+          4 + 5 = ?
+        </div>
+
+
+        <input
+          id="answer"
+          class="answer"
+          type="number"
+          inputmode="numeric"
+          autocomplete="off"
+          aria-label="Vastaus"
+        >
+
+
+        <div
+          id="error"
+          class="error">
+        </div>
+
+
+        <div class="continue">
+
+          <button id="finishButton">
+            Lähetä vastaukset
+          </button>
+
+        </div>
+
+      </div>
+
+    `;
+
+
+    const input =
+      document.getElementById("answer");
+
+    const button =
+      document.getElementById("finishButton");
+
+    const error =
+      document.getElementById("error");
+
+
+    /*
+       ENTER TOIMII
+    */
+
+    input.addEventListener("keydown", event => {
+
+      if (event.key === "Enter") {
+
+        checkAnswer();
+
       }
 
     });
 
-    console.log("Toimintojen tärkeysjärjestys:", ranking);
 
-    alert("Toimintakortit tallennettu!");
+    button.addEventListener(
+      "click",
+      checkAnswer
+    );
 
-  });
+
+    function checkAnswer() {
+
+      if (input.value === "9") {
+
+        finishSurvey();
+
+      } else {
+
+        error.textContent =
+          "Väärä vastaus. Yritä uudelleen.";
+
+        input.value = "";
+
+        input.focus();
+
+      }
+
+    }
+
+  }
+
+
+
+  /* =====================================
+     VALMIS
+     ===================================== */
+
+  function finishSurvey() {
+
+    /*
+       Tässä vaiheessa kaikki vastaukset
+       ovat tallessa selaimen localStorageen.
+    */
+
+    const activities =
+      localStorage.getItem("toimintakortit");
+
+    const features =
+      localStorage.getItem("ominaisuuskortit");
+
+
+    console.log(
+      "Toimintakortit:",
+      activities
+    );
+
+    console.log(
+      "Ominaisuuskortit:",
+      features
+    );
+
+
+    document.getElementById("app").innerHTML = `
+
+      <div class="final">
+
+        <div class="success-icon">
+          ✓
+        </div>
+
+
+        <h1>Kiitos vastauksestasi!</h1>
+
+
+        <p class="subtitle">
+          Vastauksesi auttaa uuden kirjaston suunnittelussa.
+        </p>
+
+      </div>
+
+    `;
+
+  }
 
 </script>
 
