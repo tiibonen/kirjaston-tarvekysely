@@ -1423,22 +1423,32 @@ function showFinalStep() {
 
 function finishSurvey() {
 
-  console.log(
-    "Toimintakortit:",
-    localStorage.getItem("toimintakortit")
-  );
+  const scriptUrl = "https://script.google.com/macros/s/AKfycbxXANWQs5seE7nicmChyxmpNRTfPF8k4FrgEe7pDTxRp9DjvSeoDYgqBXg_aKTevo_pKw/exec";
 
 
-  console.log(
-    "Ominaisuuskortit:",
-    localStorage.getItem("ominaisuuskortit")
-  );
+  const data = {
+    ika: localStorage.getItem("ika"),
+
+    toimintakortit:
+      JSON.parse(
+        localStorage.getItem("toimintakortit") || "[]"
+      ),
+
+    ominaisuuskortit:
+      JSON.parse(
+        localStorage.getItem("ominaisuuskortit") || "[]"
+      )
+  };
 
 
-  console.log(
-    "Ikä:",
-    localStorage.getItem("ika")
-  );
+  fetch(scriptUrl, {
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+      "Content-Type": "text/plain;charset=utf-8"
+    },
+    body: JSON.stringify(data)
+  });
 
 
   document.getElementById("app").innerHTML = `
@@ -1449,9 +1459,7 @@ function finishSurvey() {
         ✓
       </div>
 
-
       <h1>Kiitos vastauksestasi!</h1>
-
 
       <p class="subtitle">
         Vastauksesi auttaa uuden kirjaston suunnittelussa.
