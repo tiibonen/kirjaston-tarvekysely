@@ -47,7 +47,9 @@
       margin: 0 0 18px;
     }
 
-    /* CARD AREA */
+    /* =========================
+       KORTIT
+       ========================= */
 
     .cards {
       display: grid;
@@ -57,13 +59,13 @@
     }
 
     .card {
-      aspect-ratio: 2 / 3;
       border-radius: 22px;
-      padding: 18px;
+      min-height: 220px;
+      padding: 14px;
 
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
 
       text-align: center;
@@ -100,12 +102,29 @@
       background: #eadfff;
     }
 
-    .icon {
-      font-size: 48px;
-      margin-bottom: 18px;
+    .card-image {
+      width: 100%;
+      height: 155px;
+      object-fit: contain;
+      display: block;
+      border-radius: 16px;
     }
 
-    /* RANKING */
+    .card-name {
+      width: 100%;
+      min-height: 42px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      line-height: 1.25;
+      padding: 5px;
+    }
+
+    /* =========================
+       SIJAT
+       ========================= */
 
     .ranking {
       display: flex;
@@ -145,24 +164,29 @@
     }
 
     .slot .card {
-      aspect-ratio: auto;
-
       min-height: 76px;
-      width: 280px;
+      width: 330px;
 
       margin: 6px;
 
       flex-direction: row;
       justify-content: flex-start;
 
-      gap: 15px;
+      gap: 12px;
 
-      padding: 10px 18px;
+      padding: 8px 14px;
     }
 
-    .slot .icon {
-      font-size: 32px;
-      margin: 0;
+    .slot .card-image {
+      width: 70px;
+      height: 60px;
+      flex-shrink: 0;
+    }
+
+    .slot .card-name {
+      min-height: auto;
+      justify-content: flex-start;
+      text-align: left;
     }
 
     .placeholder {
@@ -170,7 +194,9 @@
       font-size: 15px;
     }
 
-    /* BUTTON */
+    /* =========================
+       NAPPI
+       ========================= */
 
     .continue {
       margin-top: 35px;
@@ -203,7 +229,9 @@
       cursor: not-allowed;
     }
 
-    /* FINAL CHECK */
+    /* =========================
+       LOPPU
+       ========================= */
 
     .final {
       max-width: 500px;
@@ -251,7 +279,9 @@
       margin-bottom: 20px;
     }
 
-    /* MOBILE */
+    /* =========================
+       PUHELIN
+       ========================= */
 
     @media (max-width: 800px) {
 
@@ -280,17 +310,21 @@
       }
 
       .card {
-        min-height: 150px;
-        font-size: 14px;
+        min-height: 185px;
       }
 
-      .icon {
-        font-size: 40px;
+      .card-image {
+        height: 125px;
       }
 
       .slot .card {
         width: auto;
         flex: 1;
+      }
+
+      .slot .card-image {
+        width: 60px;
+        height: 55px;
       }
 
       .number {
@@ -307,11 +341,11 @@
 
 <div class="container" id="app">
 
-  <!-- ============================= -->
-  <!-- VAIHE 1: TOIMINTAKORTIT -->
-  <!-- ============================= -->
+  <!-- ==================================================
+       VAIHE 1 — TOIMINTAKORTIT
+       ================================================== -->
 
-  <section id="activityStep">
+  <section>
 
     <h1>Toimintakortit</h1>
 
@@ -319,17 +353,22 @@
       On tärkeää, että uudessa kirjastossa voi...
     </p>
 
-
     <h2>Valitse 4–5 tärkeintä</h2>
 
 
     <div class="cards" id="activityCards">
 
+
       <div class="card blue" draggable="true"
            data-name="Pelaaminen">
 
-        <div class="icon">🎮</div>
-        Pelaaminen
+        <img class="card-image"
+             src="images/pelaaminen.png"
+             alt="Pelaaminen">
+
+        <div class="card-name">
+          Pelaaminen
+        </div>
 
       </div>
 
@@ -337,8 +376,13 @@
       <div class="card blue" draggable="true"
            data-name="Etäkokouksen pitäminen">
 
-        <div class="icon">💻</div>
-        Etäkokouksen pitäminen
+        <img class="card-image"
+             src="images/etakokous.png"
+             alt="Etäkokouksen pitäminen">
+
+        <div class="card-name">
+          Etäkokouksen pitäminen
+        </div>
 
       </div>
 
@@ -346,8 +390,13 @@
       <div class="card blue" draggable="true"
            data-name="Hiljainen lukeminen">
 
-        <div class="icon">📖</div>
-        Hiljainen lukeminen
+        <img class="card-image"
+             src="images/hiljainen-lukeminen.png"
+             alt="Hiljainen lukeminen">
+
+        <div class="card-name">
+          Hiljainen lukeminen
+        </div>
 
       </div>
 
@@ -355,8 +404,13 @@
       <div class="card blue" draggable="true"
            data-name="Satutunnit">
 
-        <div class="icon">🧸</div>
-        Satutunnit
+        <img class="card-image"
+             src="images/satutunnit.png"
+             alt="Satutunnit">
+
+        <div class="card-name">
+          Satutunnit
+        </div>
 
       </div>
 
@@ -364,8 +418,13 @@
       <div class="card blue" draggable="true"
            data-name="Tulostaminen">
 
-        <div class="icon">🖨️</div>
-        Tulostaminen
+        <img class="card-image"
+             src="images/tulostaminen.png"
+             alt="Tulostaminen">
+
+        <div class="card-name">
+          Tulostaminen
+        </div>
 
       </div>
 
@@ -373,8 +432,13 @@
       <div class="card blue" draggable="true"
            data-name="Viranomaisasiointi">
 
-        <div class="icon">🏛️</div>
-        Viranomaisasiointi
+        <img class="card-image"
+             src="images/viranomaisasiointi.png"
+             alt="Viranomaisasiointi">
+
+        <div class="card-name">
+          Viranomaisasiointi
+        </div>
 
       </div>
 
@@ -382,8 +446,13 @@
       <div class="card blue" draggable="true"
            data-name="Kahvittelu ja jutustelu">
 
-        <div class="icon">☕</div>
-        Kahvittelu ja jutustelu
+        <img class="card-image"
+             src="images/kahvittelu.png"
+             alt="Kahvittelu ja jutustelu">
+
+        <div class="card-name">
+          Kahvittelu ja jutustelu
+        </div>
 
       </div>
 
@@ -391,8 +460,13 @@
       <div class="card blue" draggable="true"
            data-name="Kirjojen selailu ja katselu">
 
-        <div class="icon">📚</div>
-        Kirjojen selailu ja katselu
+        <img class="card-image"
+             src="images/kirjojen-selailu.png"
+             alt="Kirjojen selailu ja katselu">
+
+        <div class="card-name">
+          Kirjojen selailu ja katselu
+        </div>
 
       </div>
 
@@ -400,8 +474,13 @@
       <div class="card blue" draggable="true"
            data-name="Opiskelu ryhmässä">
 
-        <div class="icon">👥</div>
-        Opiskelu ryhmässä
+        <img class="card-image"
+             src="images/opiskelu-ryhmassa.png"
+             alt="Opiskelu ryhmässä">
+
+        <div class="card-name">
+          Opiskelu ryhmässä
+        </div>
 
       </div>
 
@@ -409,8 +488,13 @@
       <div class="card blue" draggable="true"
            data-name="Näyttelyiden katselu">
 
-        <div class="icon">🖼️</div>
-        Näyttelyiden katselu
+        <img class="card-image"
+             src="images/nayttelyt.png"
+             alt="Näyttelyiden katselu">
+
+        <div class="card-name">
+          Näyttelyiden katselu
+        </div>
 
       </div>
 
@@ -418,8 +502,13 @@
       <div class="card blue" draggable="true"
            data-name="Tietokoneen käyttö">
 
-        <div class="icon">🖥️</div>
-        Tietokoneen käyttö
+        <img class="card-image"
+             src="images/tietokone.png"
+             alt="Tietokoneen käyttö">
+
+        <div class="card-name">
+          Tietokoneen käyttö
+        </div>
 
       </div>
 
@@ -427,8 +516,13 @@
       <div class="card blue" draggable="true"
            data-name="Leikkiminen">
 
-        <div class="icon">🧩</div>
-        Leikkiminen
+        <img class="card-image"
+             src="images/leikkiminen.png"
+             alt="Leikkiminen">
+
+        <div class="card-name">
+          Leikkiminen
+        </div>
 
       </div>
 
@@ -493,667 +587,730 @@
 
 <script>
 
-  /* =====================================
-     YLEINEN KORTTILOGIIKKA
-     ===================================== */
+/* =====================================================
+   KORTTITOIMINTO
+   ===================================================== */
+
+function setupCards(containerId, buttonId, finished) {
+
+  const container =
+    document.getElementById(containerId);
+
+  const cards =
+    container.querySelectorAll(".card");
+
+  const slots =
+    document.querySelectorAll(".slot");
+
+  const button =
+    document.getElementById(buttonId);
 
   let draggedCard = null;
 
 
-  function setupCards(cardContainerId, buttonId, onComplete) {
+  /* -------------------------
+     DRAG START
+     ------------------------- */
 
-    const container =
-      document.getElementById(cardContainerId);
+  cards.forEach(card => {
 
-    const cards =
-      container.querySelectorAll(".card");
+    card.addEventListener("dragstart", () => {
 
-    const slots =
-      document.querySelectorAll(".slot");
+      draggedCard = card;
 
-    const button =
-      document.getElementById(buttonId);
-
-
-    /*
-       DESKTOP: DRAG & DROP
-    */
-
-    cards.forEach(card => {
-
-      card.addEventListener("dragstart", () => {
-
-        draggedCard = card;
-
-        card.classList.add("dragging");
-
-      });
-
-
-      card.addEventListener("dragend", () => {
-
-        card.classList.remove("dragging");
-
-        draggedCard = null;
-
-      });
-
-
-      /*
-         MOBILE / KLIKKAUS
-
-         Jos korttia klikataan,
-         se menee ensimmäiseen vapaaseen paikkaan.
-      */
-
-      card.addEventListener("click", () => {
-
-        const emptySlot =
-          [...slots].find(
-            slot => !slot.querySelector(".card")
-          );
-
-        if (!emptySlot) return;
-
-        placeCard(card, emptySlot);
-
-        checkSlots();
-
-      });
+      card.classList.add("dragging");
 
     });
 
 
-    /*
-       SLOTIT
-    */
+    card.addEventListener("dragend", () => {
 
-    slots.forEach(slot => {
+      card.classList.remove("dragging");
 
-      slot.addEventListener("dragover", event => {
-
-        event.preventDefault();
-
-        slot.classList.add("over");
-
-      });
-
-
-      slot.addEventListener("dragleave", () => {
-
-        slot.classList.remove("over");
-
-      });
-
-
-      slot.addEventListener("drop", event => {
-
-        event.preventDefault();
-
-        slot.classList.remove("over");
-
-        if (!draggedCard) return;
-
-        placeCard(draggedCard, slot);
-
-        checkSlots();
-
-      });
+      draggedCard = null;
 
     });
 
 
-    /*
-       ASETETAAN KORTTI
-    */
+    /* -------------------------
+       KLIKKAUS / PUHELIN
+       ------------------------- */
 
-    function placeCard(card, slot) {
+    card.addEventListener("click", () => {
 
-      const oldCard =
-        slot.querySelector(".card");
+      const emptySlot =
+        [...slots].find(
+          slot => !slot.querySelector(".card")
+        );
 
-      /*
-         Jos paikassa oli jo kortti,
-         palautetaan vanha kortti korttialueelle.
-      */
+      if (!emptySlot) return;
 
-      if (oldCard) {
+      placeCard(card, emptySlot);
 
-        container.appendChild(oldCard);
+      checkSlots();
 
-      }
+    });
 
-
-      const placeholder =
-        slot.querySelector(".placeholder");
-
-      if (placeholder) {
-
-        placeholder.remove();
-
-      }
+  });
 
 
-      slot.appendChild(card);
+  /* -------------------------
+     SLOTIT
+     ------------------------- */
+
+  slots.forEach(slot => {
+
+    slot.addEventListener("dragover", event => {
+
+      event.preventDefault();
+
+      slot.classList.add("over");
+
+    });
+
+
+    slot.addEventListener("dragleave", () => {
+
+      slot.classList.remove("over");
+
+    });
+
+
+    slot.addEventListener("drop", event => {
+
+      event.preventDefault();
+
+      slot.classList.remove("over");
+
+      if (!draggedCard) return;
+
+      placeCard(draggedCard, slot);
+
+      checkSlots();
+
+    });
+
+  });
+
+
+  /* -------------------------
+     KORTIN SIIRTÄMINEN
+     ------------------------- */
+
+  function placeCard(card, slot) {
+
+    const oldCard =
+      slot.querySelector(".card");
+
+
+    if (oldCard) {
+
+      container.appendChild(oldCard);
 
     }
 
 
-    /*
-       TARKISTETAAN VALINTOJEN MÄÄRÄ
-    */
-
-    function checkSlots() {
-
-      let count = 0;
+    const placeholder =
+      slot.querySelector(".placeholder");
 
 
-      slots.forEach(slot => {
+    if (placeholder) {
 
-        if (slot.querySelector(".card")) {
-
-          count++;
-
-        }
-
-      });
-
-
-      button.disabled = count < 4;
+      placeholder.remove();
 
     }
 
 
-    /*
-       JATKA
-    */
-
-    button.addEventListener("click", () => {
-
-      const ranking = [];
-
-
-      slots.forEach(slot => {
-
-        const card =
-          slot.querySelector(".card");
-
-
-        if (card) {
-
-          ranking.push({
-            name: card.dataset.name,
-            position: slot.querySelector(".number").textContent
-          });
-
-        }
-
-      });
-
-
-      onComplete(ranking);
-
-    });
+    slot.appendChild(card);
 
   }
 
 
+  /* -------------------------
+     VALINTOJEN MÄÄRÄ
+     ------------------------- */
 
-  /* =====================================
-     VAIHE 1 VALMIS
-     ===================================== */
+  function checkSlots() {
+
+    let count = 0;
+
+
+    slots.forEach(slot => {
+
+      if (slot.querySelector(".card")) {
+
+        count++;
+
+      }
+
+    });
+
+
+    button.disabled = count < 4;
+
+  }
+
+
+  /* -------------------------
+     JATKA
+     ------------------------- */
+
+  button.addEventListener("click", () => {
+
+    const ranking = [];
+
+
+    slots.forEach((slot, index) => {
+
+      const card =
+        slot.querySelector(".card");
+
+
+      if (card) {
+
+        ranking.push({
+          name: card.dataset.name,
+          position: index + 1
+        });
+
+      }
+
+    });
+
+
+    finished(ranking);
+
+  });
+
+}
+
+
+/* =====================================================
+   VAIHE 1
+   ===================================================== */
+
+setupCards(
+  "activityCards",
+  "activityButton",
+  function(ranking) {
+
+    localStorage.setItem(
+      "toimintakortit",
+      JSON.stringify(ranking)
+    );
+
+
+    showFeatureStep();
+
+  }
+);
+
+
+/* =====================================================
+   VAIHE 2 — OMINAISUUSKORTIT
+   ===================================================== */
+
+function showFeatureStep() {
+
+  document.getElementById("app").innerHTML = `
+
+    <section>
+
+      <h1>Ominaisuuskortit</h1>
+
+      <p class="subtitle">
+        Haluan, että tilassa on...
+      </p>
+
+      <h2>Valitse 4–5 tärkeintä</h2>
+
+
+      <div class="cards" id="featureCards">
+
+
+        <div class="card purple" draggable="true"
+             data-name="Säkkituolit ja nojatuolit">
+
+          <img class="card-image"
+               src="images/sakkituolit.png"
+               alt="Säkkituolit ja nojatuolit">
+
+          <div class="card-name">
+            Säkkituolit ja nojatuolit
+          </div>
+
+        </div>
+
+
+        <div class="card purple" draggable="true"
+             data-name="Suljettavat hiljaiset etätyö- ja opiskelutilat">
+
+          <img class="card-image"
+               src="images/hiljaiset-tyotilat.png"
+               alt="Suljettavat hiljaiset etätyö- ja opiskelutilat">
+
+          <div class="card-name">
+            Suljettavat hiljaiset etätyö- ja opiskelutilat
+          </div>
+
+        </div>
+
+
+        <div class="card purple" draggable="true"
+             data-name="Isot yhteistyöpöydät">
+
+          <img class="card-image"
+               src="images/yhteistyopoydat.png"
+               alt="Isot yhteistyöpöydät">
+
+          <div class="card-name">
+            Isot yhteistyöpöydät
+          </div>
+
+        </div>
+
+
+        <div class="card purple" draggable="true"
+             data-name="Nuorten oma nurkka">
+
+          <img class="card-image"
+               src="images/nuorten-nurkka.png"
+               alt="Nuorten oma nurkka">
+
+          <div class="card-name">
+            Nuorten oma nurkka
+          </div>
+
+        </div>
+
+
+        <div class="card purple" draggable="true"
+             data-name="Pelikonsolit ja pelilaitteet">
+
+          <img class="card-image"
+               src="images/pelikonsolit.png"
+               alt="Pelikonsolit ja pelilaitteet">
+
+          <div class="card-name">
+            Pelikonsolit ja pelilaitteet
+          </div>
+
+        </div>
+
+
+        <div class="card purple" draggable="true"
+             data-name="Kahviautomaatti">
+
+          <img class="card-image"
+               src="images/kahviautomaatti.png"
+               alt="Kahviautomaatti">
+
+          <div class="card-name">
+            Kahviautomaatti
+          </div>
+
+        </div>
+
+
+        <div class="card purple" draggable="true"
+             data-name="Lainaus- ja palautusautomaatit">
+
+          <img class="card-image"
+               src="images/lainausautomaatit.png"
+               alt="Lainaus- ja palautusautomaatit">
+
+          <div class="card-name">
+            Lainaus- ja palautusautomaatit
+          </div>
+
+        </div>
+
+
+        <div class="card purple" draggable="true"
+             data-name="Asiakastietokoneet">
+
+          <img class="card-image"
+               src="images/asiakastietokoneet.png"
+               alt="Asiakastietokoneet">
+
+          <div class="card-name">
+            Asiakastietokoneet
+          </div>
+
+        </div>
+
+
+        <div class="card purple" draggable="true"
+             data-name="Kirjahyllyjä">
+
+          <img class="card-image"
+               src="images/kirjahyllyt.png"
+               alt="Kirjahyllyjä">
+
+          <div class="card-name">
+            Kirjahyllyjä
+          </div>
+
+        </div>
+
+
+        <div class="card purple" draggable="true"
+             data-name="Uutuuskirjoja">
+
+          <img class="card-image"
+               src="images/uutuuskirjat.png"
+               alt="Uutuuskirjoja">
+
+          <div class="card-name">
+            Uutuuskirjoja
+          </div>
+
+        </div>
+
+
+        <div class="card purple" draggable="true"
+             data-name="Leluja ja piirustusvälineitä">
+
+          <img class="card-image"
+               src="images/lelut.png"
+               alt="Leluja ja piirustusvälineitä">
+
+          <div class="card-name">
+            Leluja ja piirustusvälineitä
+          </div>
+
+        </div>
+
+
+        <div class="card purple" draggable="true"
+             data-name="Mukavia tuoleja ja nojatuoleja">
+
+          <img class="card-image"
+               src="images/mukavat-tuolit.png"
+               alt="Mukavia tuoleja ja nojatuoleja">
+
+          <div class="card-name">
+            Mukavia tuoleja ja nojatuoleja
+          </div>
+
+        </div>
+
+
+        <div class="card purple" draggable="true"
+             data-name="Kirkas valaistus">
+
+          <img class="card-image"
+               src="images/kirkas-valaistus.png"
+               alt="Kirkas valaistus">
+
+          <div class="card-name">
+            Kirkas valaistus
+          </div>
+
+        </div>
+
+
+        <div class="card purple" draggable="true"
+             data-name="Lämmin valaistus">
+
+          <img class="card-image"
+               src="images/lammin-valaistus.png"
+               alt="Lämmin valaistus">
+
+          <div class="card-name">
+            Lämmin valaistus
+          </div>
+
+        </div>
+
+
+        <div class="card purple" draggable="true"
+             data-name="Selkeät opasteet">
+
+          <img class="card-image"
+               src="images/opasteet.png"
+               alt="Selkeät opasteet">
+
+          <div class="card-name">
+            Selkeät opasteet
+          </div>
+
+        </div>
+
+
+        <div class="card purple" draggable="true"
+             data-name="Sanoma- ja aikakauslehdet">
+
+          <img class="card-image"
+               src="images/lehdet.png"
+               alt="Sanoma- ja aikakauslehdet">
+
+          <div class="card-name">
+            Sanoma- ja aikakauslehdet
+          </div>
+
+        </div>
+
+
+        <div class="card purple" draggable="true"
+             data-name="Digilehdet">
+
+          <img class="card-image"
+               src="images/digilehdet.png"
+               alt="Digilehdet">
+
+          <div class="card-name">
+            Digilehdet
+          </div>
+
+        </div>
+
+
+        <div class="card purple" draggable="true"
+             data-name="Asiakaspalvelutiski">
+
+          <img class="card-image"
+               src="images/asiakaspalvelu.png"
+               alt="Asiakaspalvelutiski">
+
+          <div class="card-name">
+            Asiakaspalvelutiski
+          </div>
+
+        </div>
+
+
+        <div class="card purple" draggable="true"
+             data-name="Eväiden syöntimahdollisuus">
+
+          <img class="card-image"
+               src="images/evassyonti.png"
+               alt="Eväiden syöntimahdollisuus">
+
+          <div class="card-name">
+            Eväiden syöntimahdollisuus
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+      <h2>Tärkeysjärjestys</h2>
+
+
+      <div class="ranking">
+
+        <div class="slot">
+          <div class="number">1.</div>
+          <div class="placeholder">
+            Raahaa tärkein kortti tähän
+          </div>
+        </div>
+
+        <div class="slot">
+          <div class="number">2.</div>
+          <div class="placeholder">
+            Raahaa kortti tähän
+          </div>
+        </div>
+
+        <div class="slot">
+          <div class="number">3.</div>
+          <div class="placeholder">
+            Raahaa kortti tähän
+          </div>
+        </div>
+
+        <div class="slot">
+          <div class="number">4.</div>
+          <div class="placeholder">
+            Raahaa kortti tähän
+          </div>
+        </div>
+
+        <div class="slot">
+          <div class="number">5.</div>
+          <div class="placeholder">
+            Raahaa kortti tähän
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="continue">
+
+        <button id="featureButton" disabled>
+          Jatka →
+        </button>
+
+      </div>
+
+    </section>
+
+  `;
+
 
   setupCards(
-    "activityCards",
-    "activityButton",
+    "featureCards",
+    "featureButton",
     function(ranking) {
 
       localStorage.setItem(
-        "toimintakortit",
+        "ominaisuuskortit",
         JSON.stringify(ranking)
       );
 
 
-      showFeatureStep();
+      showFinalStep();
 
     }
   );
 
+}
 
 
-  /* =====================================
-     VAIHE 2
-     OMINAISUUSKORTIT
-     ===================================== */
+/* =====================================================
+   VAIHE 3 — BOTTISUOJA
+   ===================================================== */
 
-  function showFeatureStep() {
+function showFinalStep() {
 
-    document.getElementById("app").innerHTML = `
+  document.getElementById("app").innerHTML = `
 
-      <section id="featureStep">
+    <div class="final">
 
-        <h1>Ominaisuuskortit</h1>
+      <h1>Vielä yksi pieni tehtävä</h1>
 
-        <p class="subtitle">
-          Haluan, että tilassa on...
-        </p>
+      <p class="subtitle">
+        Varmistetaan, että vastauksesi on tullut ihmiseltä.
+      </p>
 
 
-        <h2>Valitse 4–5 tärkeintä</h2>
+      <div class="math">
+        4 + 5 = ?
+      </div>
 
 
-        <div class="cards" id="featureCards">
+      <input
+        id="answer"
+        class="answer"
+        type="number"
+        inputmode="numeric"
+        autocomplete="off"
+        aria-label="Vastaus"
+      >
 
 
-          <div class="card purple" draggable="true"
-               data-name="Säkkituolit ja nojatuolit">
+      <div id="error" class="error"></div>
 
-            <div class="icon">🛋️</div>
-            Säkkituolit ja nojatuolit
 
-          </div>
+      <div class="continue">
 
-
-          <div class="card purple" draggable="true"
-               data-name="Suljettavat hiljaiset etätyö- ja opiskelutilat">
-
-            <div class="icon">🚪</div>
-            Suljettavat hiljaiset etätyö- ja opiskelutilat
-
-          </div>
-
-
-          <div class="card purple" draggable="true"
-               data-name="Isot yhteistyöpöydät">
-
-            <div class="icon">👥</div>
-            Isot yhteistyöpöydät
-
-          </div>
-
-
-          <div class="card purple" draggable="true"
-               data-name="Nuorten oma nurkka">
-
-            <div class="icon">🧑</div>
-            Nuorten oma nurkka
-
-          </div>
-
-
-          <div class="card purple" draggable="true"
-               data-name="Pelikonsolit ja pelilaitteet">
-
-            <div class="icon">🎮</div>
-            Pelikonsolit ja pelilaitteet
-
-          </div>
-
-
-          <div class="card purple" draggable="true"
-               data-name="Kahviautomaatti">
-
-            <div class="icon">☕</div>
-            Kahviautomaatti
-
-          </div>
-
-
-          <div class="card purple" draggable="true"
-               data-name="Lainaus- ja palautusautomaatit">
-
-            <div class="icon">🤖</div>
-            Lainaus- ja palautusautomaatit
-
-          </div>
-
-
-          <div class="card purple" draggable="true"
-               data-name="Asiakastietokoneet">
-
-            <div class="icon">💻</div>
-            Asiakastietokoneet
-
-          </div>
-
-
-          <div class="card purple" draggable="true"
-               data-name="Kirjahyllyjä">
-
-            <div class="icon">📚</div>
-            Kirjahyllyjä
-
-          </div>
-
-
-          <div class="card purple" draggable="true"
-               data-name="Uutuuskirjoja">
-
-            <div class="icon">✨</div>
-            Uutuuskirjoja
-
-          </div>
-
-
-          <div class="card purple" draggable="true"
-               data-name="Leluja ja piirustusvälineitä">
-
-            <div class="icon">🧸</div>
-            Leluja ja piirustusvälineitä
-
-          </div>
-
-
-          <div class="card purple" draggable="true"
-               data-name="Mukavia tuoleja ja nojatuoleja">
-
-            <div class="icon">🪑</div>
-            Mukavia tuoleja ja nojatuoleja
-
-          </div>
-
-
-          <div class="card purple" draggable="true"
-               data-name="Kirkas valaistus">
-
-            <div class="icon">💡</div>
-            Kirkas valaistus
-
-          </div>
-
-
-          <div class="card purple" draggable="true"
-               data-name="Lämmin valaistus">
-
-            <div class="icon">🕯️</div>
-            Lämmin valaistus
-
-          </div>
-
-
-          <div class="card purple" draggable="true"
-               data-name="Selkeät opasteet">
-
-            <div class="icon">🧭</div>
-            Selkeät opasteet
-
-          </div>
-
-
-          <div class="card purple" draggable="true"
-               data-name="Sanoma- ja aikakauslehdet">
-
-            <div class="icon">📰</div>
-            Sanoma- ja aikakauslehdet
-
-          </div>
-
-
-          <div class="card purple" draggable="true"
-               data-name="Digilehdet">
-
-            <div class="icon">📱</div>
-            Digilehdet
-
-          </div>
-
-
-          <div class="card purple" draggable="true"
-               data-name="Asiakaspalvelutiski">
-
-            <div class="icon">👩‍💼</div>
-            Asiakaspalvelutiski
-
-          </div>
-
-
-          <div class="card purple" draggable="true"
-               data-name="Eväiden syöntimahdollisuus">
-
-            <div class="icon">🥪</div>
-            Eväiden syöntimahdollisuus
-
-          </div>
-
-
-        </div>
-
-
-        <h2>Tärkeysjärjestys</h2>
-
-
-        <div class="ranking">
-
-          <div class="slot">
-            <div class="number">1.</div>
-            <div class="placeholder">
-              Raahaa tärkein kortti tähän
-            </div>
-          </div>
-
-
-          <div class="slot">
-            <div class="number">2.</div>
-            <div class="placeholder">
-              Raahaa kortti tähän
-            </div>
-          </div>
-
-
-          <div class="slot">
-            <div class="number">3.</div>
-            <div class="placeholder">
-              Raahaa kortti tähän
-            </div>
-          </div>
-
-
-          <div class="slot">
-            <div class="number">4.</div>
-            <div class="placeholder">
-              Raahaa kortti tähän
-            </div>
-          </div>
-
-
-          <div class="slot">
-            <div class="number">5.</div>
-            <div class="placeholder">
-              Raahaa kortti tähän
-            </div>
-          </div>
-
-        </div>
-
-
-        <div class="continue">
-
-          <button id="featureButton" disabled>
-            Jatka →
-          </button>
-
-        </div>
-
-      </section>
-    `;
-
-
-    setupCards(
-      "featureCards",
-      "featureButton",
-      function(ranking) {
-
-        localStorage.setItem(
-          "ominaisuuskortit",
-          JSON.stringify(ranking)
-        );
-
-
-        showFinalStep();
-
-      }
-    );
-
-  }
-
-
-
-  /* =====================================
-     VAIHE 3
-     BOTTISUOJA
-     ===================================== */
-
-  function showFinalStep() {
-
-    document.getElementById("app").innerHTML = `
-
-      <div class="final">
-
-        <h1>Vielä yksi pieni tehtävä</h1>
-
-        <p class="subtitle">
-          Varmistetaan, että vastauksesi on tullut ihmiseltä.
-        </p>
-
-
-        <div class="math">
-          4 + 5 = ?
-        </div>
-
-
-        <input
-          id="answer"
-          class="answer"
-          type="number"
-          inputmode="numeric"
-          autocomplete="off"
-          aria-label="Vastaus"
-        >
-
-
-        <div
-          id="error"
-          class="error">
-        </div>
-
-
-        <div class="continue">
-
-          <button id="finishButton">
-            Lähetä vastaukset
-          </button>
-
-        </div>
+        <button id="finishButton">
+          Lähetä vastaukset
+        </button>
 
       </div>
 
-    `;
+    </div>
+
+  `;
 
 
-    const input =
-      document.getElementById("answer");
+  const input =
+    document.getElementById("answer");
 
-    const button =
-      document.getElementById("finishButton");
+  const button =
+    document.getElementById("finishButton");
 
-    const error =
-      document.getElementById("error");
-
-
-    /*
-       ENTER TOIMII
-    */
-
-    input.addEventListener("keydown", event => {
-
-      if (event.key === "Enter") {
-
-        checkAnswer();
-
-      }
-
-    });
+  const error =
+    document.getElementById("error");
 
 
-    button.addEventListener(
-      "click",
-      checkAnswer
-    );
+  input.focus();
 
 
-    function checkAnswer() {
+  input.addEventListener("keydown", event => {
 
-      if (input.value === "9") {
+    if (event.key === "Enter") {
 
-        finishSurvey();
+      checkAnswer();
 
-      } else {
+    }
 
-        error.textContent =
-          "Väärä vastaus. Yritä uudelleen.";
+  });
 
-        input.value = "";
 
-        input.focus();
+  button.addEventListener(
+    "click",
+    checkAnswer
+  );
 
-      }
+
+  function checkAnswer() {
+
+    if (input.value === "9") {
+
+      finishSurvey();
+
+    } else {
+
+      error.textContent =
+        "Väärä vastaus. Yritä uudelleen.";
+
+      input.value = "";
+
+      input.focus();
 
     }
 
   }
 
+}
 
 
-  /* =====================================
-     VALMIS
-     ===================================== */
+/* =====================================================
+   VALMIS
+   ===================================================== */
 
-  function finishSurvey() {
+function finishSurvey() {
 
-    /*
-       Tässä vaiheessa kaikki vastaukset
-       ovat tallessa selaimen localStorageen.
-    */
-
-    const activities =
-      localStorage.getItem("toimintakortit");
-
-    const features =
-      localStorage.getItem("ominaisuuskortit");
+  console.log(
+    "Toimintakortit:",
+    localStorage.getItem("toimintakortit")
+  );
 
 
-    console.log(
-      "Toimintakortit:",
-      activities
-    );
-
-    console.log(
-      "Ominaisuuskortit:",
-      features
-    );
+  console.log(
+    "Ominaisuuskortit:",
+    localStorage.getItem("ominaisuuskortit")
+  );
 
 
-    document.getElementById("app").innerHTML = `
+  document.getElementById("app").innerHTML = `
 
-      <div class="final">
+    <div class="final">
 
-        <div class="success-icon">
-          ✓
-        </div>
-
-
-        <h1>Kiitos vastauksestasi!</h1>
-
-
-        <p class="subtitle">
-          Vastauksesi auttaa uuden kirjaston suunnittelussa.
-        </p>
-
+      <div class="success-icon">
+        ✓
       </div>
 
-    `;
 
-  }
+      <h1>Kiitos vastauksestasi!</h1>
+
+
+      <p class="subtitle">
+        Vastauksesi auttaa uuden kirjaston suunnittelussa.
+      </p>
+
+    </div>
+
+  `;
+
+}
 
 </script>
 
