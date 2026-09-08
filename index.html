@@ -230,6 +230,56 @@
     }
 
     /* =========================
+       IKÄKYSYMYS
+       ========================= */
+
+    .age-section {
+      max-width: 650px;
+      margin: 80px auto;
+      text-align: center;
+    }
+
+    .age-options {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 35px;
+    }
+
+    .age-option {
+      width: 100%;
+      padding: 24px 20px;
+
+      border: 2px solid transparent;
+      border-radius: 20px;
+
+      background: #eadfff;
+      color: #24324a;
+
+      font-size: 21px;
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        background 0.15s ease,
+        border-color 0.15s ease;
+    }
+
+    .age-option:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 7px 18px rgba(40, 90, 130, 0.12);
+    }
+
+    .age-option.selected {
+      background: #c9b2ff;
+      border-color: #7c5ac7;
+      box-shadow: 0 6px 18px rgba(90, 60, 150, 0.18);
+    }
+
+    /* =========================
        LOPPU
        ========================= */
 
@@ -305,6 +355,11 @@
         font-size: 15px;
       }
 
+      h2 {
+        font-size: 18px;
+        line-height: 1.4;
+      }
+
       .cards {
         gap: 10px;
       }
@@ -331,6 +386,15 @@
         width: 45px;
       }
 
+      .age-section {
+        margin: 50px auto;
+      }
+
+      .age-option {
+        padding: 22px 15px;
+        font-size: 19px;
+      }
+
     }
 
   </style>
@@ -353,7 +417,10 @@
       On tärkeää, että uudessa kirjastossa voi...
     </p>
 
-    <h2>Valitse 4–5 tärkeintä. Klikkaa kortteja siinä järjestyksessä, jonka mukaan pidät niitä tärkeinä. Ensimmäiseksi valitsemasi tulee sijalle 1. </p></h2>
+    <h2>
+      Valitse 4–5 tärkeintä. Klikkaa kortteja siinä järjestyksessä,
+      jonka mukaan pidät niitä tärkeinä. Ensimmäiseksi valitsemasi tulee sijalle 1.
+    </h2>
 
 
     <div class="cards" id="activityCards">
@@ -822,7 +889,10 @@ function showFeatureStep() {
         Haluan, että tilassa on...
       </p>
 
-      <h2>Valitse 4–5 tärkeintä. Klikkaa kortteja siinä järjestyksessä, jonka mukaan pidät niitä tärkeinä. Ensimmäiseksi valitsemasi tulee sijalle 1. </p></h2>
+      <h2>
+        Valitse 4–5 tärkeintä. Klikkaa kortteja siinä järjestyksessä,
+        jonka mukaan pidät niitä tärkeinä. Ensimmäiseksi valitsemasi tulee sijalle 1.
+      </h2>
 
 
       <div class="cards" id="featureCards">
@@ -1164,7 +1234,7 @@ function showFeatureStep() {
       );
 
 
-      showFinalStep();
+      showAgeStep();
 
     }
   );
@@ -1173,7 +1243,82 @@ function showFeatureStep() {
 
 
 /* =====================================================
-   VAIHE 3 — BOTTISUOJA
+   VAIHE 3 — IKÄ
+   ===================================================== */
+
+function showAgeStep() {
+
+  document.getElementById("app").innerHTML = `
+
+    <section class="age-section">
+
+      <h1>Ikäsi</h1>
+
+      <p class="subtitle">
+        Valitse ikäryhmäsi.
+      </p>
+
+      <div class="age-options">
+
+        <button class="age-option"
+                data-age="10–18">
+          10–18
+        </button>
+
+        <button class="age-option"
+                data-age="18–35">
+          18–35
+        </button>
+
+        <button class="age-option"
+                data-age="35–50">
+          35–50
+        </button>
+
+        <button class="age-option"
+                data-age="50–70+">
+          50–70+
+        </button>
+
+      </div>
+
+    </section>
+
+  `;
+
+
+  const options =
+    document.querySelectorAll(".age-option");
+
+
+  options.forEach(option => {
+
+    option.addEventListener("click", () => {
+
+      options.forEach(item => {
+        item.classList.remove("selected");
+      });
+
+      option.classList.add("selected");
+
+      localStorage.setItem(
+        "ika",
+        option.dataset.age
+      );
+
+      setTimeout(() => {
+        showFinalStep();
+      }, 250);
+
+    });
+
+  });
+
+}
+
+
+/* =====================================================
+   VAIHE 4 — BOTTISUOJA
    ===================================================== */
 
 function showFinalStep() {
@@ -1287,6 +1432,12 @@ function finishSurvey() {
   console.log(
     "Ominaisuuskortit:",
     localStorage.getItem("ominaisuuskortit")
+  );
+
+
+  console.log(
+    "Ikä:",
+    localStorage.getItem("ika")
   );
 
 
